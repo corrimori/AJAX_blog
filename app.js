@@ -9,5 +9,21 @@ if (process.env.NODE_ENV !== 'test') app.use(morgan('dev'))
 app.use(bodyParser.json())
 app.use(cors())
 
-const blogRoutes = require('./src/routes/blog.js')
-app.use('/blog', blogRoutes)
+const blogRoutes = require('./src/routes/blogs.js')
+console.log('going to hit blog routes ++++++++++++');
+app.use('/blogs', blogRoutes)
+
+// any other route is not allowed
+app.all('*', (req, res, next) => res.sendStatus(404))
+
+app.use((err, req, res, next) => {
+  res.status(err.status).json(err)
+})
+
+if (process.env.NODE_ENV !== 'test') {
+  app.listen(port, () => {
+    console.log(`The Costume Shop is open on port ${port}!`)
+  })
+}
+
+module.exports = app

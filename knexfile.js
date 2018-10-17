@@ -3,7 +3,7 @@ module.exports = {
     client: 'pg',
     connection: {
       host: 'localhost',
-      database: 'AJAXblog'
+      database: 'ajaxblog'
     },
     migrations: {
       directory: './db/migrations'
